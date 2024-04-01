@@ -1,0 +1,31 @@
+:root {
+    --color-background: #FCFCFC;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Merriweather", sans-serif;
+    background: var(--color-background);
+    height: 100%;
+}
+
+.wrapper {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.content {
+    flex: 1 1 auto;
+}
