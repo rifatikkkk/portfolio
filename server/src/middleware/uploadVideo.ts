@@ -24,24 +24,28 @@ export const uploadVideo = async (
 
       const dateTime = giveCurrentDateTime();
 
-      let typeVideo = "";
+      let type = "video";
       let folder = "";
 
       switch (req.route.path) {
         case "/video/simple":
           folder = "simple_video";
-          typeVideo = "video";
           break;
+
         case "/video/tag/:tags":
           folder = "tag_video";
-          typeVideo = "video";
+          break;
+
+        case "/video/person/:name":
+          folder = "person_video";
+          break;
 
         default:
           break;
       }
       const storageRef = ref(
         storage,
-        `${typeVideo}/${folder}/video_${dateTime}.mp4`
+        `${type}/${folder}/video_${dateTime}.mp4`
       );
 
       const metadata = {

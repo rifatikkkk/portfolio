@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  addPersonVideo,
   addSimpleVideo,
   addTagsVideo,
 } from "../../controllers/admin/videoController";
@@ -18,5 +19,11 @@ export default (router: Router) => {
     uploads.single("video"),
     uploadVideo,
     addTagsVideo
+  );
+  router.post(
+    "/video/person/:name",
+    uploads.single("video"),
+    uploadVideo,
+    addPersonVideo
   );
 };

@@ -24,33 +24,60 @@ export const addTagsVideo = async (req: Request, res: Response) => {
   const { tags } = req.params;
 
   try {
-    if (tags) {
-      const tagsFilter = tags?.split(",");
+    const tagsFilter = tags?.split(",");
 
-      const assignTags = await prisma.video.create({
-        data: {
-          description: description || undefined,
-          url: res.locals.downloadURL,
-          tags: {
-            create: tagsFilter.map((tag) => ({
-              tag: {
-                connectOrCreate: {
-                  where: {
-                    name: tag,
-                  },
-                  create: {
-                    name: tag,
-                  },
+    const assignTags = await prisma.video.create({
+      data: {
+        description: description || undefined,
+        url: res.locals.downloadURL,
+        tags: {
+          create: tagsFilter.map((tag) => ({
+            tag: {
+              connectOrCreate: {
+                where: {
+                  name: tag,
+                },
+                create: {
+                  name: tag,
                 },
               },
-            })),
+            },
+          })),
+        },
+      },
+    });
+    res.status(200).json(assignTags);
+  } catch (error) {
+    console.error("Error in create Tag Video", error);
+    res.status(500).json({ error: "Internal server error!" });
+  }
+};
+
+export const addPersonVideo = async (req: Request, res: Response) => {
+  const { description, secretCode } = req.body;
+  const { name } = req.params;
+
+  try {
+    const assignPerson = await prisma.video.create({
+      data: {
+        description: description || undefined,
+        url: res.locals.downloadURL,
+
+        person: {
+          connectOrCreate: {
+            where: {
+              name,
+            },
+            create: {
+              name,
+              secretCode, // not required ?
+            },
           },
         },
-      });
-      res.status(200).json(assignTags);
-    } else {
-      res.status(400).json({ error: "You need add tags!" });
-    }
+      },
+    });
+
+    res.status(200).json(assignPerson);
   } catch (error) {
     console.error("Error in create Tag Video", error);
     res.status(500).json({ error: "Internal server error!" });
