@@ -27,11 +27,14 @@ export const uploadVideo = async (
       let typeVideo = "";
       let folder = "";
 
-      switch (req.originalUrl) {
-        case "/api/admin/video":
+      switch (req.route.path) {
+        case "/video/simple":
           folder = "simple_video";
           typeVideo = "video";
           break;
+        case "/video/tag/:tags":
+          folder = "tag_video";
+          typeVideo = "video";
 
         default:
           break;

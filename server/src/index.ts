@@ -4,14 +4,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import adminRoutes from "./routes/admin";
-import bodyParser from "body-parser";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(bodyParser());
 
 app.use("/api/admin", adminRoutes());
 

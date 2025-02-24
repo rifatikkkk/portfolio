@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase.config";
+import { auth } from "../../config/firebase.config";
 
 const { FIREBASE_USER, FIREBASE_PASS } = process.env;
 
