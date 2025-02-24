@@ -14,7 +14,7 @@ export const addSimpleVideo = async (req: Request, res: Response) => {
 
     res.status(200).json(video);
   } catch (error) {
-    console.error("Error in add Video", error);
+    console.error("Error in add simple Video", error);
     res.status(500).json({ error: "Internal server error!" });
   }
 };
@@ -79,7 +79,7 @@ export const addPersonVideo = async (req: Request, res: Response) => {
 
     res.status(200).json(assignPerson);
   } catch (error) {
-    console.error("Error in create Tag Video", error);
+    console.error("Error in create Person Video", error);
     res.status(500).json({ error: "Internal server error!" });
   }
 };

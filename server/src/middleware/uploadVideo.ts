@@ -24,29 +24,25 @@ export const uploadVideo = async (
 
       const dateTime = giveCurrentDateTime();
 
-      let type = "video";
-      let folder = "";
+      let fullPath = "";
 
       switch (req.route.path) {
         case "/video/simple":
-          folder = "simple_video";
+          fullPath = `video/simple_video/video_${dateTime}.mp4`;
           break;
 
         case "/video/tag/:tags":
-          folder = "tag_video";
+          fullPath = `video/tag_video/${req.params.tags}/video_${dateTime}.mp4`; // split some tags ?
           break;
 
         case "/video/person/:name":
-          folder = "person_video";
+          fullPath = `video/person_video/${req.params.name}/video_${dateTime}.mp4`;
           break;
 
         default:
           break;
       }
-      const storageRef = ref(
-        storage,
-        `${type}/${folder}/video_${dateTime}.mp4`
-      );
+      const storageRef = ref(storage, fullPath);
 
       const metadata = {
         contentType: req.file.mimetype,
