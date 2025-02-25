@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import adminRoutes from "./routes/admin";
+import userRoutes from "./routes/user";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/admin", adminRoutes());
+app.use("/api/user", userRoutes());
 
 const port = process.env.SERVER_PORT || 5000;
 
