@@ -5,9 +5,6 @@ const prisma = new PrismaClient({
     person: {
       secretCode: true,
     },
-    user: {
-      password: true,
-    },
   },
 });
 
