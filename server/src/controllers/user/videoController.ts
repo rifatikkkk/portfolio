@@ -36,20 +36,19 @@ export const getPersonVideo = async (req: Request, res: Response) => {
     const personVideos = await prisma.person.findUnique({
       where: {
         name,
+        secretCode,
       },
       include: {
         videos: true,
+      },
+      omit: {
+        secretCode: true,
       },
     });
 
     // rewrite code with "if"
     if (!personVideos) {
       res.status(404).json({ error: "Person not found!" });
-      return;
-    }
-
-    if (personVideos.secretCode !== secretCode) {
-      res.status(403).json({ error: "Incorrect secret code!" });
       return;
     }
 
