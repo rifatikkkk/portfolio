@@ -41,9 +41,6 @@ export const getPersonVideo = async (req: Request, res: Response) => {
       include: {
         videos: true,
       },
-      omit: {
-        secretCode: true,
-      },
     });
 
     // rewrite code with "if"
