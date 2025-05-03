@@ -30,9 +30,13 @@ export const getVideosByTag = async (req: Request, res: Response) => {
 };
 
 export const getPersonVideo = async (req: Request, res: Response) => {
-  const { secretCode } = req.body;
+  const { secretCode, typeNetwork } = req.body;
   const { name } = req.params;
   try {
+    if (!secretCode || !typeNetwork) {
+      res.status(404).json({ error: "All field is important!" });
+      return;
+    }
     const personVideos = await prisma.person.findUnique({
       where: {
         name,

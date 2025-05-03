@@ -28,7 +28,7 @@ export const addTagsVideo = async (req: Request, res: Response) => {
 
     const assignTags = await prisma.video.create({
       data: {
-        description: description || undefined,
+        description: description,
         url: res.locals.downloadURL,
         tags: {
           create: tagsFilter.map((tag) => ({
@@ -54,23 +54,25 @@ export const addTagsVideo = async (req: Request, res: Response) => {
 };
 
 export const addPersonVideo = async (req: Request, res: Response) => {
-  const { description, secretCode } = req.body;
+  const { description, secretCode, typeNetwork } = req.body;
   const { name } = req.params;
 
   try {
     const assignPerson = await prisma.video.create({
       data: {
-        description: description || undefined,
+        description: description,
         url: res.locals.downloadURL,
 
         person: {
           connectOrCreate: {
             where: {
               name,
+              secretCode,
             },
             create: {
               name,
-              secretCode, // not required ?
+              secretCode,
+              typeNetwork,
             },
           },
         },
